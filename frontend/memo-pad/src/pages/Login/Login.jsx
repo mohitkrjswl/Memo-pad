@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import Navbar from '../../components/Navbar'
+import Navbar from '../../components/Navbar/Navbar'
 import { Link } from 'react-router-dom'
-import Password from '../../inputpassword/Password'
+import Password from '../../components/Navbar/Navbar'
 import { validateEmail } from '../../utils/helper'
 
 const Login = () => {

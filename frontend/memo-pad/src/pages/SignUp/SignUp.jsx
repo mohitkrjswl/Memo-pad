@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Navbar from '../../components/Navbar'
-import Password from '../../inputpassword/Password';
+import Navbar from '../../components/Navbar/Navbar'
+import Password from '../../components/inputpassword/Password';
 import { Link } from 'react-router-dom';
 const SignUp = () => {
 
