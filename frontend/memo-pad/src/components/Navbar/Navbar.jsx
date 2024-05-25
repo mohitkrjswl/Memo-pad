@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import SearchBar from '../SearchBar/SearchBar';
 
 
-const Navbar = ({ userInfo }) => {
+const Navbar = ({ userInfo, onSearchNote, handleClearSearch }) => {
   const [searchQuerry, setSearchQuerry] = useState("");
   const navigate = useNavigate();
   const onLogout = () => {
@@ -13,16 +13,19 @@ const Navbar = ({ userInfo }) => {
   };
 
   const handleSearch = () => {
-
+    if (searchQuerry) {
+      onSearchNote(searchQuerry)
+    }
   };
 
   const onClearSearch = () => {
     setSearchQuerry("");
+    handleClearSearch();
   }
 
   return (
-    <div className='bg-white flex items-center justify-between px-6 py-2 drop-shadow'>
-      <h2 className='text-xl font-semibold text-black py-2'>Memo-Pad</h2>
+    <div className='bg-slate-900 flex items-center justify-between px-6 py-2 drop-shadow'>
+      <h2 className='text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to bg-purple-700 py-2'>Memo-Pad </h2>
       <SearchBar
         value={searchQuerry}
         onChange={({ target }) => {
