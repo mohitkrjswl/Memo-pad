@@ -1,20 +1,65 @@
 import React, { useState } from 'react'
 import TagInput from '../../components/inputpassword/TagInput'
 import { MdClose } from 'react-icons/md';
+import axiosInstance from '../../utils/axiosInstance';
 
-const AddNotes = ({ noteData, type, onclose }) => {
+const AddNotes = ({ noteData, type, getAllNotes, onclose }) => {
 
-  const [title, setTitle] = useState("");
-  const [content, setcontent] = useState("");
-  const [tags, setTags] = useState([]);
+  const [title, setTitle] = useState(noteData.title || "");
+  const [content, setContent] = useState(noteData.content || "");
+  const [tags, setTags] = useState(noteData.tags || []);
 
   const [error, setError] = useState(null);
 
   // Add note
-  const addNewNote = async () => { };
+  const addNewNote = async () => {
+    try {
+      const response = await axiosInstance.post('/add-note', {
+        title,
+        content,
+        tags,
+      });
+
+      if (response.data && response.data.note) {
+        getAllNotes();
+        onclose();
+      }
+
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setError(error.response.data.message);
+      }
+    }
+  };
 
   // Edit note
-  const editNote = async () => { };
+  const editNote = async () => {
+    try {
+      const response = await axiosInstance.put('/edit-note', {
+        title,
+        content,
+        tags,
+      });
+
+      if (response.data && response.data.note) {
+        getAllNotes();
+        onclose();
+      }
+
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setError(error.response.data.message);
+      }
+    }
+  };
 
   const handleAddNote = () => {
     if (!title) {
@@ -58,7 +103,7 @@ const AddNotes = ({ noteData, type, onclose }) => {
           placeholder='Content'
           rows={10}
           value={content}
-          onChange={({ target }) => setcontent(target.value)}
+          onChange={({ target }) => setContent(target.value)}
         />
       </div>
       <div className='mt-3'>
@@ -66,7 +111,9 @@ const AddNotes = ({ noteData, type, onclose }) => {
         <TagInput tags={tags} setTags={setTags} />
       </div>
       {error && <p className='text-red-400 text-xs pt-4'>{error}</p>}
-      <button className='btn-primary font-medium mt-5 p-3' onClick={handleAddNote}>Add</button>
+      <button className='btn-primary font-medium mt-5 p-3' onClick={handleAddNote}>
+
+        {type === "edit" ? "UPDATE" : "ADD"}</button>
     </div>
 
   )
