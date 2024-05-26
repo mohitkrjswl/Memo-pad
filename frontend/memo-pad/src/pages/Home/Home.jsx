@@ -124,7 +124,7 @@ const Home = () => {
     const noteId = noteData._id
     try {
       const response = await axiosInstance.put('/update-note-pinned/' + noteId, {
-        "isPnned": !noteData.isPinned,
+        "isPinned": !noteData.isPinned,
       });
 
       if (response.data && response.data.note) {

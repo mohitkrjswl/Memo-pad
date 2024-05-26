@@ -14,7 +14,7 @@ const NoteCard = ({ title, date, content, tags, isPinned, onEdit, onDelete, onPi
       </div>
       <p className='text-xs text-slate-600 mt-2'>{content.slice(0, 60)}</p>
       <div className='flex items-center justify-between mt-2'>
-        <div className='text-xs text-slate-500'>{tags.map((item, index) => (<span key={index}>#{item} </span>))}</div>
+        <div className='text-xs text-slate-500'>{tags.map((item) => `#${item}`)}</div>
         <div className='flex items-center gap-2'>
           <MdCreate className='icon-btn hover:text-sky-500' onClick={onEdit} />
           <MdDelete className='icon-btn hover:text-black' onClick={onDelete} />

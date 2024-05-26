@@ -161,7 +161,7 @@ app.put('/edit-note/:noteId', authenticateToken, async (req, res) => {
 
 
 // get all notes
-app.get('/get-all-notes/', authenticateToken, async (req, res) => {
+app.get('/get-all-notes', authenticateToken, async (req, res) => {
   const { user } = req.user;
 
 

@@ -17,10 +17,9 @@ const AddNotes = ({ noteData, type, getAllNotes, onClose, showToastMessage }) =>
         content,
         tags,
       });
-
       if (response.data && response.data.note) {
         showToastMessage('Note Added Successfully', 'add');
-        getAllNotes();
+        await getAllNotes();
         onClose();
       }
     } catch (error) {
@@ -42,7 +41,7 @@ const AddNotes = ({ noteData, type, getAllNotes, onClose, showToastMessage }) =>
 
       if (response.data && response.data.note) {
         showToastMessage('Note Updated Successfully', 'edit');
-        getAllNotes();
+        await getAllNotes();
         onClose();
       }
     } catch (error) {
